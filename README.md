@@ -1,0 +1,1 @@
+copy a dtb into the EFI partition

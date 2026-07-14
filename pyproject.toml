@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "dtbsync"
+version = "0.1.0"
+description = "Copy a DTB into EFI partition"
+homepage = "https://github.com/theironrobin/dtbsync"
+authors = ["Alex Robinson <alex@ironrobin.net>"]
+license = "MPL-2.0"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+colorama = "^0.4.6"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.3.0"
+isort = "^5.12.0"
+pylint = "^3.0.1"
+pytest = "^7.4.2"
+pytest-cov = "^4.1.0"
+pytest-dotenv = "^0.5.2"
+
+[tool.poetry.scripts]
+dtbsync = 'dtbsync.cli:run'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
