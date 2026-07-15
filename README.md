@@ -1,1 +1,21 @@
-copy a dtb into the EFI partition
+# dtbsync
+
+Synchronize the appropriate Device Tree Blob (DTB) to the EFI System Partition.
+
+## Features
+
+- Automatically detects the current hardware
+- Finds the matching DTB for the installed kernel
+- Locates the mounted EFI System Partition
+- Copies the DTB into the EFI System Partition
+- Designed to integrate with pacman hooks
+
+## Supported Hardware
+
+dtbsync currently supports the following Qualcomm-based platforms:
+
+- **Lenovo ThinkPad X13s** (SC8280XP)
+- **Lenovo ThinkPad T14s** (X1E, untested)
+- **Windows Dev Kit 2023 (Volterra)** (SC8280XP)
+
+Support for additional Device Tree-based systems is planned.
