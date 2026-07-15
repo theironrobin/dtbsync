@@ -27,6 +27,17 @@ def get_dtb_name() -> str:
     compatible = result.stdout.rstrip("\x00").split("\x00")[0]
     return dtbMap[compatible]
 
+def get_device_maker() -> str:
+    """Return the device's device_maker, e.g., 'qcom'"""
+    result = subprocess.run(
+        ["cat", "/proc/device-tree/compatible"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.rstrip("\x00").split("\x00")[1].split(",")[0]
+
+
 
 def get_kernel_version() -> str:
     """Return the running kernel version."""
@@ -52,8 +63,13 @@ def run():
     args = parser.parse_args()
     dtb_name = get_dtb_name()
     kernel_version = get_kernel_version()
+    device_maker = get_device_maker()
+    dtb_path = "/usr/lib/modules/" + kernel_version + "/dtb/qcom/" 
+    
     print("DTB Name:", dtb_name)
     print("Kernel Version:", kernel_version)
+    print("device_maker:", get_device_maker())
+    
     #for user in args.users:
     #    print(f"Hello {Fore.YELLOW}{user.name}{Fore.RESET}")
     exit(0)
