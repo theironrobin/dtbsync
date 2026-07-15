@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dtbsync"
-version = "0.1.0"
+version = "0.2.0"
 description = "Copy a DTB into EFI partition"
 homepage = "https://github.com/theironrobin/dtbsync"
 authors = ["Alex Robinson <alex@ironrobin.net>"]

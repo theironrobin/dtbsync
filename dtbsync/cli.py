@@ -3,7 +3,9 @@ command line interface
 """
 
 from argparse import ONE_OR_MORE, ArgumentParser
+from glob import glob
 import json
+from pathlib import Path
 import shutil
 import subprocess
 
@@ -36,15 +38,28 @@ def get_board_variant() -> str:
 
 
 def get_kernel_version() -> str:
-    """Return the running kernel version."""
-    result = subprocess.run(
-        ["uname", "-r"],
-        check=True,
-        capture_output=True,
-        text=True,
+    """Return the kernel version contained in an installed DTB path."""
+    dtb_paths = glob("/usr/lib/modules/*/dtb/qcom/*.dtb")
+    if not dtb_paths:
+        raise RuntimeError("No Qualcomm DTB found under /usr/lib/modules")
+    dtb_path = (
+        dtb_paths[0]
+        if len(dtb_paths) == 1
+        else max(dtb_paths, key=lambda path: Path(path).stat().st_mtime)
     )
-    x = result.stdout.strip()
-    return x
+
+    path = Path(dtb_path)
+    parts = path.parts
+    try:
+        modules_index = parts.index("modules")
+        kernel_version = parts[modules_index + 1]
+    except (ValueError, IndexError) as error:
+        raise ValueError(f"Invalid kernel DTB path: {dtb_path}") from error
+
+    if parts[modules_index + 2 : modules_index + 4] != ("dtb", "qcom"):
+        raise ValueError(f"Invalid Qualcomm DTB path: {dtb_path}")
+
+    return kernel_version
 
 
 

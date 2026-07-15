@@ -47,6 +47,29 @@ def test_version(capsys):
     assert len(stderr) == 0
 
 
+@mock.patch("dtbsync.cli.sys.stdin")
+def test_get_kernel_version_from_dtb_path(mock_stdin):
+    """Extract the kernel version directory from an installed DTB path."""
+    mock_stdin.isatty.return_value = False
+    mock_stdin.__iter__.return_value = iter(
+        [
+            "usr/lib/modules/7.1.3-arch1-3/dtb/qcom/"
+            "sc8280xp-lenovo-thinkpad-x13s.dtb\n"
+        ]
+    )
+
+    assert cli.get_kernel_version() == "7.1.3-arch1-3"
+
+
+@mock.patch("dtbsync.cli.sys.stdin")
+def test_get_kernel_version_does_not_block_on_terminal(mock_stdin):
+    """Interactive use fails instead of waiting indefinitely for input."""
+    mock_stdin.isatty.return_value = True
+
+    with pytest.raises(RuntimeError, match="No package paths on stdin"):
+        cli.get_kernel_version()
+
+
 def test_hello(capsys):
     """
     Check usage with 2 arguments
