@@ -17,9 +17,10 @@ from .model import User
 # lenovo,thinkpad-t14s-oled␀lenovo,thinkpad-t14s␀qcom,x1e78100␀qcom,x1e80100
 # lenovo,thinkpad-x13s␀qcom,sc8280xp␀
 dtbMap = {
-    "thinkpad-x13s": ("qcom", "sc8280xp-lenovo-thinkpad-x13s.dtb"),
+    "blackrock": ("qcom", "sc8280xp-microsoft-blackrock.dtb"),
+    "orangepi-5-plus": ("rockchip", "rk3588-orangepi-5-plus.dtb"),
     "thinkpad-t14s-oled": ("qcom", "x1e78100-lenovo-thinkpad-t14s-oled.dtb"),
-    "blackrock": ("qcom", "sc8280xp-microsoft-blackrock.dtb")
+    "thinkpad-x13s": ("qcom", "sc8280xp-lenovo-thinkpad-x13s.dtb"),
 }
 
 
