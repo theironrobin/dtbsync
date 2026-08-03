@@ -1,5 +1,14 @@
 # dtbsync
 
+# This project has moved
+
+**The canonical repository is now on Codeberg:**
+
+https://codeberg.org/ironrobin/dtbsync
+
+This GitHub repository is no longer accepting issues or pull requests. Please
+open new issues and submit contributions on Codeberg.
+
 Synchronize the appropriate Device Tree Blob (DTB) to the EFI System Partition.
 
 ## Features
